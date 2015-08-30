@@ -15,7 +15,8 @@ namespace Project_Library
                         new XElement(Program.GameElement, new XAttribute(Program.GameID, gameLibrary.id),
                         new XElement(Program.GamePath, gameLibrary.path),
                         new XElement(Program.GameName, gameLibrary.gameName),
-                        new XElement(Program.GameSize, gameLibrary.size)
+                        new XElement(Program.GameSize, gameLibrary.size),
+                        new XElement(Program.CoverArtPath, gameLibrary.coverArtPath)
                     )
                  );
             Program.libraryXML.Element(Program.RootXMLName).Attribute(Program.IDSize).SetValue(gameLibrary.id);

@@ -12,21 +12,23 @@ namespace Project_Library
         public string path { get; set; }
         public string gameName { get; set; }
         public double size { get; set; }
-
-        public GameLibrary(string path, string gameName, double size)
+        public string coverArtPath { get; set; }
+        public GameLibrary(string path, string gameName, double size, string coverArtPath)
         {
             id = ++Program.libraryID;
             this.path = path;
             this.gameName = gameName;
             this.size = size;
+            this.coverArtPath = coverArtPath;
         }
 
-        public GameLibrary(int id, string path, string gameName, double size) 
+        public GameLibrary(int id, string path, string gameName, double size, string coverArtPath) 
         {
             this.id = id;
             this.path = path;
             this.gameName = gameName;
             this.size = size;
+            this.coverArtPath = coverArtPath;
         }
     }
 }

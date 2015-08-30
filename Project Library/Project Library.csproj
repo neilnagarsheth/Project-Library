@@ -44,8 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GalleryLibrary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GalleryLibrary.Designer.cs">
+      <DependentUpon>GalleryLibrary.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameLibrary.cs" />
     <Compile Include="GameLibraryController.cs" />
+    <Compile Include="GamePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Library.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +63,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GalleryLibrary.resx">
+      <DependentUpon>GalleryLibrary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Library.resx">
       <DependentUpon>Library.cs</DependentUpon>
     </EmbeddedResource>

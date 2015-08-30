@@ -32,7 +32,7 @@ namespace Project_Library
                 if(result.Equals(DialogResult.OK) && Path.GetExtension(BrowseForGames.FileName).Equals(".exe"))
                 {
                     validFile = true;
-                    GameLibrary game = new GameLibrary(BrowseForGames.FileName, Path.GetFileName(BrowseForGames.FileName), new System.IO.FileInfo(BrowseForGames.FileName).Length);
+                    GameLibrary game = new GameLibrary(BrowseForGames.FileName, Path.GetFileName(BrowseForGames.FileName), new System.IO.FileInfo(BrowseForGames.FileName).Length, "");
                     gameLibraryController.AddGame(game);
                     AbosolutePathLabel.Text = BrowseForGames.FileName;
                     AddGameToLibraryListView(game);
@@ -62,8 +62,8 @@ namespace Project_Library
         private void PopulateGameLibrary()
         {
             List<GameLibrary> Games = (
-                    from game in Program.libraryXML.Descendants(Program.GameElement) 
-                    select new GameLibrary(int.Parse(game.Attribute(Program.GameID).Value), game.Element(Program.GamePath).Value, game.Element(Program.GameName).Value, double.Parse(game.Element(Program.GameSize).Value))
+                    from game in Program.libraryXML.Descendants(Program.GameElement)
+                    select new GameLibrary(Int32.Parse(game.Attribute(Program.GameID).Value), game.Element(Program.GamePath).Value, game.Element(Program.GameName).Value, double.Parse(game.Element(Program.GameSize).Value), game.Element(Program.CoverArtPath).Value)
                 ).ToList();
             foreach (GameLibrary game in Games)
             {

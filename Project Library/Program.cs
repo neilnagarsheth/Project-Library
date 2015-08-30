@@ -21,8 +21,7 @@ namespace Project_Library
         public const String GamePath = "Path";
         public const String GameName = "Name";
         public const String GameSize = "GameSize";
-
-
+        public const String CoverArtPath = "CoverArtPath";
 
         private static void CheckXMLFile()
         {
@@ -53,7 +52,7 @@ namespace Project_Library
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             CheckXMLFile();
-            Application.Run(new Library());
+            Application.Run(new GalleryLibrary());
         }
     }
 }
