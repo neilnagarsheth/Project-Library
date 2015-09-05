@@ -11,37 +11,38 @@ namespace Project_Library
     public class GamePanel : Panel
     {
         public GameLibrary gameLibrary { get; set; }
+        public PictureBox gameCoverArt { get; set; }
+
         private Label nameOfGame;
-        private PictureBox gameCoverArt;
 
         public GamePanel(GameLibrary gameLibrary)
         {
             this.gameLibrary = gameLibrary;
-            Margin = new Padding(3);
-            Size = new Size(200,300);
-            BackColor = Color.Gray;
+            Margin = new Padding(10);
+            Size = new Size(80,120);
             SetLabel();
             SetImage();
+            BorderStyle = BorderStyle.FixedSingle;
         }
 
         private void SetLabel()
         {
             nameOfGame = new Label();
+            nameOfGame.Font = new Font(FontFamily.GenericSansSerif, 7.0f);
             nameOfGame.Text = gameLibrary.gameName;
             nameOfGame.Anchor = AnchorStyles.None;
             this.Controls.Add(nameOfGame);
-            nameOfGame.Location = new Point((nameOfGame.Parent.ClientSize.Width / 2) - nameOfGame.Width, nameOfGame.Parent.ClientSize.Height - 15);
+            nameOfGame.Location = new Point(0, nameOfGame.Parent.ClientSize.Height - 15);
         }
 
         private void SetImage()
         {
             gameCoverArt = new PictureBox();
-            gameCoverArt.Size = new Size(200, 280);
+            gameCoverArt.Size = new Size(80, 100);
             if (!gameLibrary.coverArtPath.Equals(String.Empty))
             {
                 gameCoverArt.Image = new Bitmap(gameLibrary.coverArtPath);
             }
-            gameCoverArt.BorderStyle = BorderStyle.FixedSingle;
             this.Controls.Add(gameCoverArt);
         }
 
