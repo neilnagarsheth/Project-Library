@@ -60,10 +60,6 @@
             this.AutoAddBtn.Text = "Automatically Find Games";
             this.AutoAddBtn.UseVisualStyleBackColor = true;
             // 
-            // BrowseForGames
-            // 
-            this.BrowseForGames.FileName = "openFileDialog1";
-            // 
             // AddGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -75,7 +71,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 321);
             this.Name = "AddGame";
             this.Padding = new System.Windows.Forms.Padding(15);
-            this.Text = "AddGame";
+            this.Text = "Add A Game";
             this.ResumeLayout(false);
 
         }
