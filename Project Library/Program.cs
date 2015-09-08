@@ -45,7 +45,6 @@ namespace Project_Library
             libraryXML.Save(XMLFileName);
         }
 
-
         [STAThread]
         static void Main()
         {
