@@ -22,5 +22,20 @@ namespace Project_Library
             Program.libraryXML.Element(Program.RootXMLName).Attribute(Program.IDSize).SetValue(gameLibrary.id);
             Program.libraryXML.Save(Program.XMLFileName);
         }
+
+        public void UpdateGame(GameLibrary gameLibrary)
+        {
+            var target = Program.libraryXML
+                .Element(Program.RootXMLName)
+                .Elements(Program.GameElement)
+                .Where(e => e.Attribute(Program.GameID).Value.Equals(gameLibrary.id.ToString()))
+                .Single();
+            target.Element(Program.GameName).Value = gameLibrary.gameName;
+            target.Element(Program.GamePath).Value = gameLibrary.path;
+            target.Element(Program.GameSize).Value = gameLibrary.size.ToString();
+            target.Element(Program.CoverArtPath).Value = gameLibrary.coverArtPath;
+
+            Program.libraryXML.Save(Program.XMLFileName);
+        }
     }
 }
