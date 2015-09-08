@@ -12,14 +12,16 @@ namespace Project_Library
 {
     public partial class GalleryLibrary : Form
     {
-        public bool isAddGameOpen { get; set; }
+        private GamePanel activePanel;
+        private GameLibraryController gameLibraryController;
 
         public GalleryLibrary()
         {
             InitializeComponent();
             PopulateLibrary();
-            isAddGameOpen = false;
             BrowseForArtBtn.Hide();
+            activePanel = null;
+            gameLibraryController = new GameLibraryController();
         }
 
         private void PopulateLibrary()
@@ -34,9 +36,24 @@ namespace Project_Library
             }
         }
 
+        public void AddGameToLibraryFlowPanel(GameLibrary game)
+        {
+            GamePanel gamePanel = new GamePanel(game);
+            gamePanel.gameCoverArt.Click += (sender, eventArgs) =>
+                {
+                    activePanel = gamePanel;
+                    UpdateBottomPanel(gamePanel.gameLibrary);
+                };
+            gamePanel.gameCoverArt.DoubleClick += (sender, eventArgs) =>
+                {
+                    System.Diagnostics.Process.Start(gamePanel.gameLibrary.path);
+                };
+            GalleryPanel.Controls.Add(gamePanel);
+        }
+
         public void UpdateBottomPanel(GameLibrary gameLibrary)
         {
-            if(!BrowseForArtBtn.Visible)
+            if (!BrowseForArtBtn.Visible)
             {
                 BrowseForArtBtn.Visible = true;
             }
@@ -46,24 +63,27 @@ namespace Project_Library
             coverArtPathLabel.Text = gameLibrary.coverArtPath;
         }
 
-        public void AddGameToLibraryFlowPanel(GameLibrary game)
-        {
-            GamePanel gamePanel = new GamePanel(game);
-            gamePanel.gameCoverArt.Click += (sender, eventArgs) =>
-                {
-                    UpdateBottomPanel(gamePanel.gameLibrary);
-                };
-            GalleryPanel.Controls.Add(gamePanel);
-        }
-
         private void AddGameBtn_Click(object sender, EventArgs e)
         {
-            if (!isAddGameOpen)
+            AddGame addGameForm = new AddGame();
+            addGameForm.galleryLibraryForm = this;
+            addGameForm.ShowDialog();
+        }
+
+        private void BrowseForArtBtn_Click(object sender, EventArgs e)
+        {
+            if(activePanel != null)
             {
-                AddGame addGameForm = new AddGame();
-                addGameForm.galleryLibraryForm = this;
-                addGameForm.Show();
-                isAddGameOpen = true;
+                BrowseForArt.Filter = "Images(*.BMP;*.JPG;*.GIF,*.PNG,*.TIFF)|*.BMP;*.JPG;*.GIF;*.PNG;*.TIFF";
+                DialogResult result = BrowseForArt.ShowDialog();
+                if(result.Equals(DialogResult.OK))
+                {
+                    activePanel.gameLibrary.coverArtPath = BrowseForArt.FileName;
+                    gameLibraryController.UpdateGame(activePanel.gameLibrary);
+                    activePanel.SetImage();
+                    activePanel.gameCoverArt.Refresh();
+                    coverArtPathLabel.Text = activePanel.gameLibrary.coverArtPath;
+                }
             }
         }
     }

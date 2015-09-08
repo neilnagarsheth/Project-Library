@@ -37,6 +37,7 @@
             this.gamePathLabel = new System.Windows.Forms.Label();
             this.sizeLabel = new System.Windows.Forms.Label();
             this.gameNameLabel = new System.Windows.Forms.Label();
+            this.BrowseForArt = new System.Windows.Forms.OpenFileDialog();
             this.UpperFlowPanel.SuspendLayout();
             this.BottomPanel.SuspendLayout();
             this.SuspendLayout();
@@ -101,6 +102,7 @@
             this.BrowseForArtBtn.TabIndex = 3;
             this.BrowseForArtBtn.Text = "Browse for Art";
             this.BrowseForArtBtn.UseVisualStyleBackColor = true;
+            this.BrowseForArtBtn.Click += new System.EventHandler(this.BrowseForArtBtn_Click);
             // 
             // gamePathLabel
             // 
@@ -154,6 +156,7 @@
         private System.Windows.Forms.Label gamePathLabel;
         private System.Windows.Forms.Label sizeLabel;
         private System.Windows.Forms.Label gameNameLabel;
+        private System.Windows.Forms.OpenFileDialog BrowseForArt;
 
 
     }
