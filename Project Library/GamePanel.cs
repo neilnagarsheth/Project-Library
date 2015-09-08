@@ -14,12 +14,14 @@ namespace Project_Library
         public PictureBox gameCoverArt { get; set; }
 
         private Label nameOfGame;
+        private Size imageSize;
 
         public GamePanel(GameLibrary gameLibrary)
         {
             this.gameLibrary = gameLibrary;
             Margin = new Padding(10);
             Size = new Size(80,120);
+            imageSize = new Size(80, 100);
             SetLabel();
             SetImage();
             BorderStyle = BorderStyle.FixedSingle;
@@ -35,16 +37,19 @@ namespace Project_Library
             nameOfGame.Location = new Point(0, nameOfGame.Parent.ClientSize.Height - 15);
         }
 
-        private void SetImage()
+        public void SetImage()
         {
-            gameCoverArt = new PictureBox();
-            gameCoverArt.Size = new Size(80, 100);
+            if(gameCoverArt == null)
+            {
+                gameCoverArt = new PictureBox();
+                gameCoverArt.Size = imageSize;
+            }
             if (!gameLibrary.coverArtPath.Equals(String.Empty))
             {
                 gameCoverArt.Image = new Bitmap(gameLibrary.coverArtPath);
+                gameCoverArt.Image = new Bitmap(gameCoverArt.Image, imageSize);
             }
             this.Controls.Add(gameCoverArt);
         }
-
     }
 }
