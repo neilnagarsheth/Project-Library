@@ -24,31 +24,14 @@ namespace Project_Library
 
         private void ManualAddBtn_Click(object sender, EventArgs e)
         {
-            bool validFile = false;
-            DialogResult result;
-            while (!validFile)
+            BrowseForGames.Filter = "Executables|*.exe";
+            DialogResult result = BrowseForGames.ShowDialog();
+            if (result.Equals(DialogResult.OK))
             {
-                result = BrowseForGames.ShowDialog();
-                if (result.Equals(DialogResult.OK) && Path.GetExtension(BrowseForGames.FileName).Equals(".exe"))
-                {
-                    validFile = true;
-                    GameLibrary game = new GameLibrary(BrowseForGames.FileName, Path.GetFileNameWithoutExtension(BrowseForGames.FileName), new System.IO.FileInfo(BrowseForGames.FileName).Length, "");
-                    gameLibraryController.AddGame(game);
-                    galleryLibraryForm.AddGameToLibraryFlowPanel(game);
-                    galleryLibraryForm.isAddGameOpen = false;
-                    Close();
-                }
-                else if (result.Equals(DialogResult.Cancel))
-                {
-                    break;
-                }
-                else
-                {
-                    if (MessageBox.Show("Invalid file, do you wish to try and find the right file again?", "Invalid File", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).Equals(DialogResult.No))
-                    {
-                        break;
-                    }
-                }
+                GameLibrary game = new GameLibrary(BrowseForGames.FileName, Path.GetFileNameWithoutExtension(BrowseForGames.FileName), new System.IO.FileInfo(BrowseForGames.FileName).Length, "");
+                gameLibraryController.AddGame(game);
+                galleryLibraryForm.AddGameToLibraryFlowPanel(game);
+                Close();
             }
         }
     }
