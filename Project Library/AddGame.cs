@@ -28,11 +28,20 @@ namespace Project_Library
             DialogResult result = BrowseForGames.ShowDialog();
             if (result.Equals(DialogResult.OK))
             {
-                GameLibrary game = new GameLibrary(BrowseForGames.FileName, Path.GetFileNameWithoutExtension(BrowseForGames.FileName), new System.IO.FileInfo(BrowseForGames.FileName).Length, "");
+                Game game = new Game(BrowseForGames.FileName, Path.GetFileNameWithoutExtension(BrowseForGames.FileName), GetFileSizeSumFromDirectory(BrowseForGames.FileName), "");
                 gameLibraryController.AddGame(game);
                 galleryLibraryForm.AddGameToLibraryFlowPanel(game);
                 Close();
             }
+        }
+
+        private long GetFileSizeSumFromDirectory(string searchDirectory)
+        {
+            var files = Directory.EnumerateFiles(searchDirectory);
+            var currentSize = (from file in files let fileInfo = new FileInfo(file) select fileInfo.Length).Sum();
+            var directories = Directory.EnumerateDirectories(searchDirectory);
+            var subDirSize = (from directory in directories select GetFileSizeSumFromDirectory(directory)).Sum();
+            return currentSize + subDirSize;
         }
     }
 }

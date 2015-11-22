@@ -26,41 +26,41 @@ namespace Project_Library
 
         private void PopulateLibrary()
         {
-            List<GameLibrary> Games = (
+            List<Game> Games = (
                     from game in Program.libraryXML.Descendants(Program.GameElement)
-                    select new GameLibrary(Int32.Parse(game.Attribute(Program.GameID).Value), game.Element(Program.GamePath).Value, game.Element(Program.GameName).Value, double.Parse(game.Element(Program.GameSize).Value), game.Element(Program.CoverArtPath).Value)
+                    select new Game(Int32.Parse(game.Attribute(Program.GameID).Value), game.Element(Program.GamePath).Value, game.Element(Program.GameName).Value, long.Parse(game.Element(Program.GameSize).Value), game.Element(Program.CoverArtPath).Value)
                 ).ToList();
-            foreach (GameLibrary game in Games)
+            foreach (Game game in Games)
             {
                 AddGameToLibraryFlowPanel(game);
             }
         }
 
-        public void AddGameToLibraryFlowPanel(GameLibrary game)
+        public void AddGameToLibraryFlowPanel(Game game)
         {
             GamePanel gamePanel = new GamePanel(game);
             gamePanel.gameCoverArt.Click += (sender, eventArgs) =>
                 {
                     activePanel = gamePanel;
-                    UpdateBottomPanel(gamePanel.gameLibrary);
+                    UpdateBottomPanel(gamePanel.game);
                 };
             gamePanel.gameCoverArt.DoubleClick += (sender, eventArgs) =>
                 {
-                    System.Diagnostics.Process.Start(gamePanel.gameLibrary.path);
+                    System.Diagnostics.Process.Start(gamePanel.game.path);
                 };
             GalleryPanel.Controls.Add(gamePanel);
         }
 
-        public void UpdateBottomPanel(GameLibrary gameLibrary)
+        public void UpdateBottomPanel(Game game)
         {
             if (!BrowseForArtBtn.Visible)
             {
                 BrowseForArtBtn.Visible = true;
             }
-            gameNameLabel.Text = gameLibrary.gameName;
-            sizeLabel.Text = gameLibrary.size.ToString() + " Bytes";
-            gamePathLabel.Text = "Path " + gameLibrary.path;
-            coverArtPathLabel.Text = gameLibrary.coverArtPath;
+            gameNameLabel.Text = game.gameName;
+            sizeLabel.Text = game.size.ToString() + " Bytes";
+            gamePathLabel.Text = "Path " + game.path;
+            coverArtPathLabel.Text = game.coverArtPath;
         }
 
         private void AddGameBtn_Click(object sender, EventArgs e)
@@ -78,11 +78,11 @@ namespace Project_Library
                 DialogResult result = BrowseForArt.ShowDialog();
                 if(result.Equals(DialogResult.OK))
                 {
-                    activePanel.gameLibrary.coverArtPath = BrowseForArt.FileName;
-                    gameLibraryController.UpdateGame(activePanel.gameLibrary);
+                    activePanel.game.coverArtPath = BrowseForArt.FileName;
+                    gameLibraryController.UpdateGame(activePanel.game);
                     activePanel.SetImage();
                     activePanel.gameCoverArt.Refresh();
-                    coverArtPathLabel.Text = activePanel.gameLibrary.coverArtPath;
+                    coverArtPathLabel.Text = activePanel.game.coverArtPath;
                 }
             }
         }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Project_Library
 {
-    public class GameLibrary
+    public class Game
     {
         public int id { get; set; }
         public string path { get; set; }
         public string gameName { get; set; }
-        public double size { get; set; }
+        public long size { get; set; }
         public string coverArtPath { get; set; }
-        public GameLibrary(string path, string gameName, double size, string coverArtPath)
+        public Game(string path, string gameName, long size, string coverArtPath)
         {
             id = ++Program.libraryID;
             this.path = path;
@@ -22,7 +22,7 @@ namespace Project_Library
             this.coverArtPath = coverArtPath;
         }
 
-        public GameLibrary(int id, string path, string gameName, double size, string coverArtPath) 
+        public Game(int id, string path, string gameName, long size, string coverArtPath) 
         {
             this.id = id;
             this.path = path;

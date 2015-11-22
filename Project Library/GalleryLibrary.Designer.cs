@@ -136,6 +136,7 @@
             this.Controls.Add(this.BottomPanel);
             this.Controls.Add(this.GalleryPanel);
             this.Controls.Add(this.UpperFlowPanel);
+            this.MinimumSize = new System.Drawing.Size(642, 484);
             this.Name = "GalleryLibrary";
             this.Text = "Library";
             this.UpperFlowPanel.ResumeLayout(false);
