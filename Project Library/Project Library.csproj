@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -57,16 +58,10 @@
     <Compile Include="GalleryLibrary.Designer.cs">
       <DependentUpon>GalleryLibrary.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameLibrary.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="GameLibraryController.cs" />
     <Compile Include="GamePanel.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Library.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Library.Designer.cs">
-      <DependentUpon>Library.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,9 +73,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GamePanel.resx">
       <DependentUpon>GamePanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Library.resx">
-      <DependentUpon>Library.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
